@@ -1,0 +1,34 @@
+# .gitignore
+
+# --- 仮想環境(自分のMacの中だけで使うもの) ---
+.venv/
+
+# --- Python が自動で作るキャッシュ ---
+__pycache__/
+*.pyc
+
+# --- Jupyter が自動で作る一時ファイル ---
+.ipynb_checkpoints/
+
+# --- macOS が自動で作るファイル ---
+.DS_Store
+
+# --- 一時データ・キャッシュ置き場 ---
+data/
+
+# --- 秘密情報(今回は使わないが、事故防止のため) ---
+.env
+
+# --- VS Code の個人設定 ---
+.vscode/
+
+# --- 生成画像は、.gitkeep 以外は Git に含めない ---
+# (README 用のサンプル画像をGitに含める判断は、フェーズ6で行います)
+outputs/*
+!outputs/.gitkeep
+
+# --- StatsBomb ロゴ(再配布の可否が未確認のため、フェーズ6まで Git に含めない) ---
+assets/*.png
+
+# --- pip install -e . で自動生成される、インストールの記録 ---
+*.egg-info/

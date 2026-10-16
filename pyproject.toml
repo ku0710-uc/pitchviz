@@ -1,0 +1,20 @@
+# pyproject.toml
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pitchviz"
+version = "0.1.0"
+description = "Pass maps and shot maps (xG) from StatsBomb Open Data"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "statsbombpy",
+    "mplsoccer",
+    "matplotlib",
+    "pandas",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
