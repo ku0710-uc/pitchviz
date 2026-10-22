@@ -1081,11 +1081,11 @@ gh repo edit --homepage "https://あなたのアプリの名前.streamlit.app"
 - [ ] 次をメモする。
 
 ```
-アプリの URL:          ______
-公開範囲:              ______(公開 / 非公開)
-Python のバージョン:   ______(Cloud の設定)
-Streamlit のバージョン:______
-ロゴの扱い(フェーズ7): ______(道1 / 道2 / 道3)
+アプリの URL:          https://pitchviz-japan.streamlit.app
+公開範囲:              公開(公開 / 非公開)
+Python のバージョン:   3.13.3(Cloud の設定)
+Streamlit のバージョン: 1.66.0
+ロゴの扱い(フェーズ7): 道2(道1 / 道2 / 道3)
 ```
 
 ### 手順9の完了チェック
