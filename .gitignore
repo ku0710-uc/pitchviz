@@ -32,3 +32,6 @@ assets/*.png
 
 # --- pip install -e . で自動生成される、インストールの記録 ---
 *.egg-info/
+
+# --- Streamlit の秘密の設定(今回は使わないが、うっかり入れないため) ---
+.streamlit/secrets.toml
