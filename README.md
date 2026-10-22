@@ -104,3 +104,5 @@ pitchviz/
 ├── pyproject.toml
 └── requirements.txt
 ```
+
+**[アプリを開く](https://pitchviz-japan.streamlit.app)**(試合と選手を選ぶと、パスマップとショットマップが表示されます)
