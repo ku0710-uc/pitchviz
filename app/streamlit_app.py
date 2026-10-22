@@ -69,7 +69,7 @@ if len(matches) == 0:
     st.error("試合の一覧を取得できませんでした。少し時間をおいて、もう一度開いてください。")
     st.stop()
 
-left, right = st.columns(2)
+left, middle, right = st.columns(3)
 with left:
     match_index = st.selectbox(
         "試合",
@@ -78,9 +78,13 @@ with left:
     )
 
 row = matches.loc[match_index]
-team_name = pick_team(row)
+japan_team = pick_team(row)
+other_team = row["away_team"] if japan_team == row["home_team"] else row["home_team"]
 match_id = int(row["match_id"])
 match_date = str(row["match_date"])
+
+with middle:
+    team_name = st.selectbox("チーム", options=[japan_team, other_team])
 
 events = load_events(match_id)
 players = list_players(events, team_name)
@@ -89,6 +93,7 @@ with right:
     choice = st.selectbox("選手", options=[ALL_PLAYERS] + players)
 
 player_name = None if choice == ALL_PLAYERS else choice
+
 
 @st.cache_resource
 def get_render_lock():
