@@ -98,9 +98,9 @@ origin	https://github.com/あなたのユーザー名/pitchviz.git (push)
 ### 1-2. フェーズ2・5のメモを手元に用意する
 
 ```
-使うチーム名:     Japan(例:Japan)
-使う match_id:    7584(例:7584)
-対戦カードと日付: 2018-07-02 Belgium vs Japan(例:2018-07-02 Belgium vs Japan)
+使うチーム名:     ______(例:Japan)
+使う match_id:    ______(例:7584)
+対戦カードと日付: ______(例:2018-07-02 Belgium vs Japan)
 ```
 
 - フェーズ5のセル2の `TEAM_NAME`、`MATCH_ID`、`MATCH_DATE` の値と同じです。
@@ -213,9 +213,8 @@ gh repo view --json visibility
 - [ ] 見つかった使用条件の原文を、**そのまま**メモに写す(ない場合は「記載なし」と書く)。
 
 ```
-Media Pack の Usage Rights(確認日:2026-10-16)
-原文: Usage Rights: External Use Approved
-  (確認したロゴ: hudl-statsbomb-logo-default。Asset Type = Logo / Asset Sub-Type = Product Logo)
+Media Pack の Usage Rights(確認日:2026-__-__)
+原文: ____________________________________________
   (例の観点: 再配布してよいか / 改変してよいか / 商用か非商用か / 表示のしかたの指定)
 ```
 
@@ -233,7 +232,7 @@ Media Pack の Usage Rights(確認日:2026-10-16)
 - [ ] 選んだ結果(A / B / C)を、メモに書く。
 
 ```
-ロゴの扱い: B(A / B / C)   理由: 外部での使用は承認されているが、ロゴのファイルの再配布については記載がないため
+ロゴの扱い: ____(A / B / C)   理由: ____________________
 ```
 
 ### 2-4. 「出典の表記」を、画像と README の両方に入れる
@@ -745,6 +744,7 @@ echo "終了コード: $?"
 pwd
 git config user.email
 git log --format='%an <%ae>' | sort -u
+gh api user --jq '.id'
 ```
 
 期待される出力の例:
@@ -753,12 +753,15 @@ git log --format='%an <%ae>' | sort -u
 /Users/あなたのユーザー名/projects/pitchviz
 12345678+あなたのユーザー名@users.noreply.github.com
 あなたの名前 <12345678+あなたのユーザー名@users.noreply.github.com>
+12345678
 ```
+
+- **最後の行(あなたの GitHub の ID)の数字が、メールの `+` の前の数字と、まったく同じ**であることを確認してください。**1桁でも違うと、別の人のアカウントのコミットとして表示されてしまいます**(実際に、1桁足りなくて、別のアカウントに結びついた例があります)。メールを手で打たず、次の「直す方法」のように、`gh` の出力から作るのが確実です。
 
 - メールアドレスが、**`数字+ユーザー名@users.noreply.github.com`** の形(フェーズ1で控えた noreply メール)になっていれば OK です。本物のメールアドレスが出た場合は、**手順7のコミットの前に**、次で直します(このリポジトリだけに効く設定です)。
 
 ```bash
-git config user.email "数字+ユーザー名@users.noreply.github.com"
+git config user.email "$(gh api user --jq '"\(.id)+\(.login)@users.noreply.github.com"')"
 ```
 
 - [ ] **[Terminal]** `~/projects/pitchviz` で、Mac のユーザー名・コンピュータ名が、ファイルに混ざっていないか検索する。
@@ -1051,7 +1054,7 @@ xxxxxxx Initial public release
 あなたの名前 <12345678+あなたのユーザー名@users.noreply.github.com>
 ```
 
-- **`git log --oneline` の行が1つだけ**で、作者が noreply メールなら OK です。
+- **`git log --oneline` の行が1つだけ**で、作者が noreply メールなら OK です。あわせて、メールの `+` の前の数字が、`gh api user --jq '.id'` の出力と**同じ**ことを確認してください(手順6-3)。
 - `git status` の一覧に、`assets/` や `outputs/` の PNG、`.venv/` が**出ていない**ことも確認してください(出ていたら、コミットの前に、手順6-5に戻ります)。
 
 ### 7-5. 新しい Public リポジトリを作って、push する
@@ -1134,9 +1137,16 @@ gh repo edit --add-topic soccer --add-topic football-analytics --add-topic stats
 | `outputs/` フォルダ | `.gitkeep` だけがある | [ ] |
 | `notebooks/` の Notebook を開く | コードだけで、表・画像の出力が**ない** | [ ] |
 | `Commits` の数 | **1** | [ ] |
-| コミットの作者 | noreply メール(本名・本物のメールが出ていない) | [ ] |
+| コミットの作者 | noreply メール(本名・本物のメールが出ていない)。作者のアイコンと名前が、**自分のアカウント** | [ ] |
 | `docs/` | 手順書と `images/` だけ(自分の非公開メモが入っていない) | [ ] |
 | `License` | (A の場合)右側に MIT License と表示される | [ ] |
+
+- **コミットの作者が、自分のアカウントか**は、画面だけでなく、次のコマンドでも確認できます。1つ目が、自分のログイン名と同じなら OK です。
+
+```bash
+gh api repos/{owner}/{repo}/commits --jq '.[] | [.sha[0:7], .author.login] | @tsv'
+gh api user --jq '.login'
+```
 
 - 1つでも期待と違えば、**そのリポジトリを、いったん Private に戻す**ことができます。
 
