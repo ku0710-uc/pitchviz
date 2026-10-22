@@ -8,6 +8,9 @@
 
 *例:2018-07-02 Belgium vs Japan(`match_id` 7584)*
 
+
+**[アプリを開く](https://pitchviz-japan.streamlit.app)**(試合と選手を選ぶと、パスマップとショットマップが表示されます)
+
 ## できること
 
 - 試合(`match_id`)とチーム名を指定して、**1行で**パスマップとショットマップを保存する
@@ -105,4 +108,4 @@ pitchviz/
 └── requirements.txt
 ```
 
-**[アプリを開く](https://pitchviz-japan.streamlit.app)**(試合と選手を選ぶと、パスマップとショットマップが表示されます)
+
