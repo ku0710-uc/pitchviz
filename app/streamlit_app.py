@@ -115,7 +115,7 @@ def render_map(kind, match_id, team_name, player_name, match_date):
 
 st.caption(f"{row['home_team']} vs {row['away_team']} ({match_date}) / 表示中: {player_name or team_name}")
 
-tab_pass, tab_shot = st.tabs(["パスマップ", "ショットマップ"])
+tab_pass, tab_shot = st.tabs(["パスマップ", "シュートマップ"])
 tab_specs = [
     (tab_pass, "pass", "この選手のパスは、データにありません。"),
     (tab_shot, "shot", "この選手のシュートは、データにありません(シュートを打っていない選手です)。"),
